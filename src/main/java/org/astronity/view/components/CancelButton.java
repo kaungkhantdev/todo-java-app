@@ -4,15 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
-public class PrimaryButton extends JButton {
+public class CancelButton extends JButton {
 
     private static final int RADIUS = 8;
+    private static final Color BG = new Color(229, 231, 235);
 
-    public PrimaryButton(String text)
+    public CancelButton(String text)
     {
         super(text);
-        setBackground(new Color(59, 130, 246));
-        setForeground(Color.WHITE);
+        setForeground(Color.BLACK);
         setFocusPainted(false);
         setBorderPainted(false);
         setContentAreaFilled(false);
@@ -27,8 +27,7 @@ public class PrimaryButton extends JButton {
     {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Color bg = getBackground();
-        g2.setColor(getModel().isPressed() ? bg.darker() : bg);
+        g2.setColor(getModel().isPressed() ? BG.darker() : BG);
         g2.fill(new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), RADIUS, RADIUS));
         g2.dispose();
         super.paintComponent(g);
