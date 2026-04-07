@@ -1,7 +1,13 @@
 package org.astronity;
 
-import org.astronity.controller.controllers.LoginController;
+import org.astronity.config.AppContext;
+import org.astronity.controller.controllers.TaskController;
 import org.astronity.controller.router.ScreenRouter;
+import org.astronity.model.repositories.TaskDao;
+import org.astronity.model.repositories.impl.TaskDaoImpl;
+import org.astronity.model.services.TaskService;
+import org.astronity.model.services.impl.TaskServiceImpl;
+import org.astronity.shared.utils.SwingUtils;
 import org.astronity.view.screens.DashboardPanel;
 import org.astronity.view.screens.LoginPanel;
 import org.astronity.view.screens.MainFrame;
@@ -15,24 +21,10 @@ public class Main {
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        MainFrame frame = new MainFrame();
-        CardLayout layout = frame.getCardLayout();
-        JPanel container = frame.getContainer();
-
-        // router
-        ScreenRouter router = new ScreenRouter(layout, container);
-
-        // controller
-        LoginController loginController = new LoginController(router);
-
-        LoginPanel loginPanel = new LoginPanel();
-        DashboardPanel dashboardPanel = new DashboardPanel();
-
-        router.register("login", loginPanel);
-        router.register("dashboard", dashboardPanel);
-
-        router.navigateTo("login");
+        SwingUtils.applySystemLaf();
+        SwingUtilities.invokeLater(() -> {
+            AppContext ctx = new AppContext();
+            ctx.mainFrame.setVisible(true);
+        });
     }
 }
